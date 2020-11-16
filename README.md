@@ -20,7 +20,7 @@ $ python3 setup.py build_ext --inplace
 
 $ cd Project/keras-retinanet/
 
-$ python3 keras_retinanet/bin/train.py --freeze-backbone --weights 'snapshots/resnet50_coco_best_v2.1.0.h5' --batch-size 8 --steps 2500 --epochs 15 csv '/home/ubuntu/PyCharm_Project/Project/Data/images/train.csv' '/home/ubuntu/PyCharm_Project/Project/Data/images/classes.csv'
+$ python3 keras_retinanet/bin/train.py --freeze-backbone --weights 'snapshots/resnet50_coco_best_v2.1.0.h5' --batch-size 8 --steps 2500 --epochs 15 csv '/Project/Data/images/train.csv' '/Project/Data/images/classes.csv'
 
 The above ^^^ needs some reconfiguring but it should at least run through 30 steps, otherwise there is an issue
 
