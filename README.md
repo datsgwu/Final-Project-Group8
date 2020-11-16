@@ -26,6 +26,9 @@ The above ^^^ needs some reconfiguring but it should at least run through 30 ste
 
 
 ### Resources
+
 https://medium.com/@ije_good/object-detection-on-satellite-imagery-using-retinanet-part-1-training-e589975afbd5
+
 Data -- https://captain-whu.github.io/DOAI2019/dataset.html
+
 Data -- https://drive.google.com/drive/folders/1gmeE3D7R62UAtuIFOB9j2M5cUPTwtsxK
