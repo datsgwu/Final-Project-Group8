@@ -3,13 +3,17 @@
 ### Getting Started
 
 $ mkdir Project
+
 $ cd Project
+
 $ mkdir Data
 
 $ git clone git@github.com:datsgwu/Final-Project-Group8.git
 
 $ git clone https://github.com/fizyr/keras-retinanet
+
 $ cd keras-retinanet
+
 $ python3 setup.py build_ext --inplace
 
 ### After running annotate.py and get_model.py
