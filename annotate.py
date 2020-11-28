@@ -12,30 +12,19 @@ import random
 from PIL import Image
 # %% -------------------------------------------------------------------------------------------------------------------
 os.getcwd()
-wd = '/home/ubuntu/PyCharm_Project/Project/Data/'
+wd = '/home/ubuntu/data/'
 os.chdir(wd)
-
-image_url = 'https://drive.google.com/uc?id=1BlaGYNNEKGmT6OjZjsJ8HoUYrTTmFcO2'
-if not os.path.exists('images/'):
-    os.system('gdown ' + image_url)
-    os.system('unzip -u ' + 'part1.zip')
 
 os.chdir(wd + 'images/')
 img_file_list = [i for i in glob.iglob('*.png')]
 
-os.chdir(wd)
-label_url = 'https://drive.google.com/uc?id=12uPWoADKggo9HGaqGh2qOmcXXn-zKjeX'
-if not os.path.exists('DOTA-v1.5_train/'):
-    os.system('gdown ' + label_url)
-    os.system('unzip -u ' + 'DOTA-v1.5_train.zip')
-
-os.chdir(wd + 'DOTA-v1.5_train/')
-annot_files = [i for i in glob.iglob('*.txt')]
+os.chdir(wd + 'annotations/')
+annot_file_list = [i for i in glob.iglob('*.txt')]
 
 # %% -------------------------------------------------------------------------------------------------------------------
 vehicle_images = []
 annot_list = []
-for file in annot_files:
+for file in annot_file_list:
     img_file = file.replace('txt', 'png')
     if img_file in img_file_list:
         with open(file, "r") as text:
@@ -44,7 +33,7 @@ for file in annot_files:
                 split = line.split(' ')
 
                 if split[-2] == 'small-vehicle':
-                    filename = '{}'.format(img_file)
+                    filename = '/home/ubuntu/data/images/{}'.format(img_file)
                     vehicle_images.append(filename)
                     x_min = min(split[:-2][0::2])
                     x_max = max(split[:-2][0::2])
@@ -56,10 +45,13 @@ for file in annot_files:
 
 # %% -------------------------------------------------------------------------------------------------------------------
 vehicle_images = set(vehicle_images)
-n_test = int(len(vehicle_images) * 0.2)
+vehicle_images = random.sample(vehicle_images, 1000)
+n_test = int(len(vehicle_images) * 0.1)
 
 random.seed(42)
 test_images = random.sample(vehicle_images, n_test)
+
+vehicle_images = [i for i in vehicle_images if i not in test_images]
 
 train = pd.DataFrame(columns=['path', 'x_min', 'y_min', 'x_max', 'y_max', 'object'])
 test = pd.DataFrame(columns=['path', 'x_min', 'y_min', 'x_max', 'y_max', 'object'])
@@ -69,7 +61,7 @@ for item in annot_list:
     if split[0] in test_images:
         test = test.append({'path': split[0], 'x_min': int(float(split[1])), 'y_min': int(float(split[2])),
                             'x_max': int(float(split[3])), 'y_max': int(float(split[4])), 'object': split[5]},ignore_index=True)
-    else:
+    elif split[0] in vehicle_images:
         train = train.append({'path': split[0], 'x_min': int(float(split[1])), 'y_min': int(float(split[2])),
                             'x_max': int(float(split[3])), 'y_max': int(float(split[4])), 'object': split[5]},ignore_index=True)
 
@@ -90,8 +82,8 @@ test = (test[(test['x_max'] > test['x_min']) & (test['y_max'] > test['y_min'])])
 # %% -------------------------------------------------------------------------------------------------------------------
 class_df = pd.DataFrame(columns=['class', 'id']).append({'class': 'small-vehicle', 'id':0}, ignore_index=True)
 
-class_df.to_csv(wd + 'images/classes.csv', header=False, index=False)
-train.to_csv(wd + 'images/train.csv', header=False, index=False)
-test.to_csv(wd + 'images/test.csv', header=False, index=False)
+class_df.to_csv(wd + 'classes.csv', header=False, index=False)
+train.to_csv(wd + 'train.csv', header=False, index=False)
+test.to_csv(wd + 'test.csv', header=False, index=False)
 
 # %% -------------------------------------------------------------------------------------------------------------------
