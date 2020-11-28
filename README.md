@@ -2,35 +2,45 @@
 
 ### Getting Started
 
-$ mkdir Project
+$ pip install pycocotools
 
-$ cd Project
+$ pip install scikit-image
 
-$ mkdir Data
+$ pip install gdown
+
+$ cd /home/ubuntu
+
+$ mkdir data
+
+$ cd data
+
+$ gdown https://drive.google.com/uc?id=1BlaGYNNEKGmT6OjZjsJ8HoUYrTTmFcO2
+
+$ unzip -u part1.zip
+
+$ mkdir annotations
+
+$ gdown https://drive.google.com/uc?id=12uPWoADKggo9HGaqGh2qOmcXXn-zKjeX
+
+$ unzip DOTA-v1.5_train.zip -d annotations
+
+$ cd ..
+
+$ mkdir project
+
+$ cd project
 
 $ git clone git@github.com:datsgwu/Final-Project-Group8.git
 
-$ git clone https://github.com/fizyr/keras-retinanet
-
-$ cd keras-retinanet
-
-$ python3 setup.py build_ext --inplace
-
-$ pip install progressbar2
-
-### After running annotate.py and get_model.py
-
-$ cd Project/keras-retinanet/
-
-$ python3 keras_retinanet/bin/train.py --freeze-backbone --weights 'snapshots/resnet50_coco_best_v2.1.0.h5' --batch-size 8 --steps 2500 --epochs 15 csv '/Project/Data/images/train.csv' '/Project/Data/images/classes.csv'
-
-The above ^^^ needs some reconfiguring but it should at least run through 30 steps, otherwise there is an issue
+$ git clone https://github.com/yhenon/pytorch-retinanet.git
 
 
-### Resources
+### After running annotate.py and get_model.py...
 
-https://medium.com/@ije_good/object-detection-on-satellite-imagery-using-retinanet-part-1-training-e589975afbd5
+$ cd /home/ubuntu/project/pytorch-retinanet/
 
-Data -- https://captain-whu.github.io/DOAI2019/dataset.html
+$ python3 train.py --dataset csv --csv_train /home/ubuntu/data/train.csv --csv_classes /home/ubuntu/data/classes.csv --csv_val /home/ubuntu/data/test.csv --epochs 200
 
-Data -- https://drive.google.com/drive/folders/1gmeE3D7R62UAtuIFOB9j2M5cUPTwtsxK
+
+### Evaluate with evaluate.py
+
