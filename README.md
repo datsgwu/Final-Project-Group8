@@ -16,6 +16,8 @@ $ cd keras-retinanet
 
 $ python3 setup.py build_ext --inplace
 
+$ pip install progressbar2
+
 ### After running annotate.py and get_model.py
 
 $ cd Project/keras-retinanet/
