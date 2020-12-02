@@ -51,7 +51,7 @@ $ git clone https://github.com/yhenon/pytorch-retinanet.git
 
 $ cd /home/ubuntu/project/pytorch-retinanet/
 
-$ python3 train.py --dataset csv --csv_train /home/ubuntu/data/train.csv --csv_classes /home/ubuntu/data/classes.csv --csv_val /home/ubuntu/data/test.csv --epochs 100
+$ python3 train.py --dataset csv --csv_train /home/ubuntu/data/train.csv --csv_classes /home/ubuntu/data/classes.csv --csv_val /home/ubuntu/data/val.csv --epochs 100
 
 
 ### Evaluate with evaluate.py
