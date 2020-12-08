@@ -56,3 +56,7 @@ $ python3 train.py --dataset csv --csv_train /home/ubuntu/data/train.csv --csv_c
 
 ### Evaluate with evaluate.py
 
+
+### For YOLO Model follow instructions in yolo2.py
+
+### Evaluate with yolo_evaluate.py
