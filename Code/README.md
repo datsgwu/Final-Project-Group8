@@ -34,7 +34,7 @@ $ unzip DOTA-v1.5_train.zip -d annotations
 
 $ cd images
 
-$ find . -size +10M -delete
+$ find . -size +5M -delete
 
 $ cd ..
 
